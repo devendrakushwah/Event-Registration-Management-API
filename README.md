@@ -5,6 +5,7 @@ Submission for Mistay
 ```Python : 3.6.8```
 
 ## Installation
+* Clone this repository by : ```git clone https://github.com/devendrakushwah/Event-Registration-Management-API.git```
 * Setup a separate virtual environment for the project
 * After activating the environment, install the required dependencies by : ```pip3 install -r requirements.txt```
 
