@@ -37,17 +37,17 @@ class EventRegisterView(CreateAPIView):
                 already_registered_events = Registration.objects.filter(user_id=request.user.id)
 
                 start = event.date
-                end = start + datetime.timedelta(minutes=event.capacity)
+                end = start + datetime.timedelta(minutes=event.duration)
 
                 for registration in already_registered_events:
                     registered_event = Event.objects.get(id=registration.event_id)
                     s = registered_event.date
-                    e = s + datetime.timedelta(minutes=registered_event.capacity)
+                    e = s + datetime.timedelta(minutes=registered_event.duration)
 
                     if end < s or start > e:
                         continue
                     else:
-                        return ApiResponse.bad_request("Event overlapping with previously registered event :"+str("event id : "+str(registered_event.id)+" "+registered_event.name))
+                        return ApiResponse.bad_request("Event overlapping with previously registered event, "+str("event id : "+str(registered_event.id)+" "+registered_event.name))
 
                 obj = Registration.objects.create(user_id=request.user.id, event_id=event_id)
                 obj.save()
